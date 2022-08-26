@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"main/app/controllers"
 )
 
 func main() {
-	fmt.Println("first commit")
+	controllers.StartMainServer()
 }
