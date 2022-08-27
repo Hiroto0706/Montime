@@ -8,11 +8,11 @@ import (
 )
 
 type ConfigList struct {
-	Port      string
-	SQLDriver string
-	DbName    string
-	LogFile   string
-	Static    string
+	Port                 string
+	SQLDriver            string
+	DbName               string
+	LogFile              string
+	Static               string
 }
 
 var Config ConfigList
