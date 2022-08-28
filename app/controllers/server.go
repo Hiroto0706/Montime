@@ -23,5 +23,7 @@ func StartMainServer() error {
 
 	http.HandleFunc("/", top)
 	http.HandleFunc("/calculate", calculate)
+
+	// port := os.Getenv("POST")
 	return http.ListenAndServe(":"+config.Config.Port, nil)
 }

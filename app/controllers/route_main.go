@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -21,7 +20,7 @@ type RemainingData struct {
 var remainingData RemainingData
 
 func top(w http.ResponseWriter, r *http.Request) {
-	generateHTML(w, "まだデータがないワン。", "layout", "top")
+	generateHTML(w, nil, "layout", "top")
 }
 
 func calculate(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +44,7 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 
 	birthday := time.Date(birthdayYear, time.Month(birthdayMonth), birthdayDay, 0, 0, 0, 0, time.Local)
 	sex := r.PostFormValue("sex")
-	fmt.Println(sex)
+	// fmt.Println(sex)
 
 	now := time.Now()
 	day1 := time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), now.Minute(), now.Second(), now.Nanosecond(), time.Local)
@@ -59,17 +58,17 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	duration := day2.Sub(day1)
-	fmt.Println(duration)
+	// fmt.Println(duration)
 
 	hours0 := int(duration.Hours())
 	days := hours0 / 24
 	hours := hours0 % 24
 	mins := int(duration.Minutes()) % 60
 	secs := int(duration.Seconds()) % 60
-	fmt.Printf("残り：%d日%d時間%d分%d秒\n", days, hours, mins, secs)
+	// fmt.Printf("残り：%d日%d時間%d分%d秒\n", days, hours, mins, secs)
 
 	remaining := days / 365
-	fmt.Printf("余命：%d年", remaining)
+	// fmt.Printf("余命：%d年", remaining)
 
 	remainingData = RemainingData{
 		Days:     days,
@@ -81,7 +80,7 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 		Duration: duration,
 	}
 
-	fmt.Println(remainingData)
+	// fmt.Println(remainingData)
 
 	generateHTML(w, remainingData, "layout", "top")
 }
