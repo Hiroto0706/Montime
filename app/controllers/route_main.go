@@ -53,7 +53,7 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 	var day2 time.Time
 	switch sex {
 	case "male":
-		day2 = birthday.AddDate(81, 0, 0)
+		day2 = birthday.AddDate(82, 0, 0)
 	case "female":
 		day2 = birthday.AddDate(88, 0, 0)
 	}

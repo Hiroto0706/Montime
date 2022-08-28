@@ -12,8 +12,12 @@ img {
 
 .wrapper {
   max-width: 670px;
-  margin: 0 auto;
+  margin: 130px auto;
   text-align: center;
+}
+
+h1 {
+  font-size: 2.2rem;
 }
 
 .background-image-left, .background-image-right {
@@ -43,8 +47,31 @@ img {
   color: white;
 }
 
+.your-time {
+  border: solid 1px black;
+  border-radius: 30px;
+  padding: 0 4%;
+  margin-top: 30px;
+}
+
 .your-time h3{
   margin-top: 30px;
   font-size: 2rem;
   color: red;
+}
+
+.your-time-content p {
+  font-size: 1.2rem;
+}
+
+.remaining-data {
+  font-size: 1.6rem;
+  color: red;
+  font-weight: bold;
+}
+
+.time-data{
+  font-size: 1.6rem;
+  color: blue;
+  font-weight: bold;
 }
