@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -8,16 +9,17 @@ import (
 )
 
 type RemainingData struct {
-	Days     int
-	Hours    int
-	Mins     int
-	Sec      int
-	Remainig int
-	Sex      string
-	Duration time.Duration
+	Days           int
+	Hours          int
+	Mins           int
+	Sec            int
+	Remaining      string
+	Sex            string
+	Duration       time.Duration
+	RemainingRatio string
 }
 
-var remainingData RemainingData
+var Data RemainingData
 
 func top(w http.ResponseWriter, r *http.Request) {
 	generateHTML(w, nil, "layout", "top")
@@ -67,20 +69,32 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 	secs := int(duration.Seconds()) % 60
 	// fmt.Printf("残り：%d日%d時間%d分%d秒\n", days, hours, mins, secs)
 
-	remaining := days / 365
-	// fmt.Printf("余命：%d年", remaining)
+	remainingData := float64(days) / float64(365)
+	remaining := fmt.Sprintf("%.2f", remainingData)
 
-	remainingData = RemainingData{
-		Days:     days,
-		Hours:    hours,
-		Mins:     mins,
-		Sec:      secs,
-		Remainig: remaining,
-		Sex:      sex,
-		Duration: duration,
+	var remainingRatio float64
+
+	switch sex {
+	case "male":
+		remainingRatio = (float64(remainingData) / 82) * 100
+	case "female":
+		remainingRatio = (float64(remainingData) / 88) * 100
 	}
 
-	// fmt.Println(remainingData)
+	ratio := fmt.Sprintf("%.2f", remainingRatio)
 
-	generateHTML(w, remainingData, "layout", "top")
+	Data = RemainingData{
+		Days:           days,
+		Hours:          hours,
+		Mins:           mins,
+		Sec:            secs,
+		Remaining:      remaining,
+		Sex:            sex,
+		Duration:       duration,
+		RemainingRatio: ratio,
+	}
+
+	// fmt.Println(Data)
+
+	generateHTML(w, Data, "layout", "top")
 }
